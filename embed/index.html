@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lingon 🍒 Web - Convert kubernetes manifests from YAML to Go (golang) code.</title>
+    <style>
+        :root {
+            /* these 4 colors are copied from https://go.dev/play/ */
+            --gray: #202224;
+            --yellow-light: #ffffdd;
+            --slate: #253443;
+            --shark: #2b2d2f;
+
+            --white: #ffffff;
+            --red: #ef402d;
+            --cherry: #ca3043;
+
+            --color-text: var(--gray);
+            --color-background: var(--yellow-light);
+            --color-background-focus: var(--white);
+            --color-background-body: var(--white);
+            --color-link: var(--cherry);
+            --color-link-visited: hotpink;
+        }
+        [data-theme='dark'] {
+            --color-text: var(--yellow-light);
+            --color-background: var(--slate);
+            --color-background-focus: var(--shark);
+            --color-background-body: var(--gray);
+            --color-link: hotpink;
+            --color-link-visited: var(--cherry);
+        }
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme='light']) {
+                --color-text: var(--yellow-light);
+                --color-background: var(--slate);
+                --color-background-focus: var(--shark);
+                --color-background-body: var(--gray);
+                --color-link: hotpink;
+                --color-link-visited: var(--cherry);
+            }
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+            sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+            max-height: 100%;
+            line-height: 1.4;
+            background-color: var(--color-background-body);
+            color: var(--color-text);
+            margin: 1rem;
+            padding: 0;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            width: 100%;
+            text-align: center;
+            font-weight: 400;
+            margin: 1rem;
+            padding: 0;
+        }
+        a{
+            color: var(--color-link);
+            text-decoration-color: var(--color-link);
+        }
+        a:visited {
+            color: var(--color-link-visited);
+            text-decoration-color: var(--color-link-visited);
+        }
+
+        .intro {
+            display: grid;
+            grid-template-columns: 1fr minmax(70%, 1fr) 1fr;
+            /*width: 50%;*/
+        }
+        .intro p {
+            grid-column: 2;
+            text-align: center;
+            margin: 1rem 1rem 1rem 1rem;
+            padding: 1rem 5rem 1rem 5rem;
+            color: var(--color-text);
+            background: none repeat scroll 0 0 var(--color-background);
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-shadow: 1px 1px 1px #999;
+        }
+        #forerr {
+            display: block;
+            margin: 1rem;
+            padding: 1rem;
+            color: var(--red);
+            border-radius: 5px;
+            border: 1px solid var(--red);
+            box-shadow: 1px 1px 1px #999;
+        }
+        #forerr.hide {
+            display: none;
+        }
+        label,
+        textarea {
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        #txtinput {
+            max-width: 100%;
+            height: auto;
+            color: var(--color-text);
+            background: none repeat scroll 0 0 var(--color-background);
+            border-image: none;
+            border-radius: 6px 6px 6px 6px;
+            box-shadow: 1px 1px 1px #999;
+            font-family: Menlo, "Lucida Console", Monaco, monospace;
+            /*font-size: small;*/
+            white-space: pre; /* preserve white spaces */
+            line-height: 1.4;
+            padding: 5px 8px;
+            transition: background-color 0.2s ease 0s;
+        }
+        #txtinput:focus {
+            background: none repeat scroll 0 0 var(--color-background-focus);
+            outline-width: 0;
+        }
+        label {
+            display: flex;
+            margin-bottom: 10px;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        #result {
+            max-width: 100%;
+            display: block;
+            margin-left: 1rem;
+            padding: 10px;
+            color: var(--color-text);
+            background: none repeat scroll 0 0 var(--color-background);
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-shadow: 1px 1px 1px #999;
+            page-break-inside: avoid;
+            font-family: Menlo, "Lucida Console", Monaco, monospace;
+            font-size: small;
+            line-height: 1.4;
+            margin-bottom: 1.6em;
+            overflow: auto;
+            white-space: pre;
+            counter-reset: line;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: minmax(400px, 1fr) minmax(400px, 1fr); /* create two columns that have a minimum width of 300px and a maximum width of the available space */
+            grid-template-rows: auto; /* create one row that fits the content */
+            gap: 20px; /* adjust the spacing as needed */
+        }
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: minmax(400px, 1fr); /* One column */
+                grid-template-rows: 2fr; /* Two rows */
+            }
+            #result{
+                margin-left: 0;
+            }
+            #txtinput{
+                width: 100%;
+            }
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+        .buttons a {
+            text-decoration: none;
+            color: var(--gray);
+            margin: 1rem;
+            /*padding: 10px;*/
+            font-family: inherit;
+            padding: 0.8rem 1rem;
+            border-radius: 1rem;
+            box-shadow: 2px 2px 2px #999;
+            border: 2px solid var(--slate);
+            background-color: beige;
+            font-size: 1rem;
+        }
+        .theme-selector {
+            position: absolute;
+            border: 0;
+            top: 2px;
+            left: 0;
+            background-color: transparent;
+            font-size: 1rem;
+        }
+        .theme-selector [data-value] {
+            display: none;
+        }
+        [data-theme='auto'] .theme-selector [data-value='auto'],
+        :root:not([data-theme]) .theme-selector [data-value='auto'] {
+            display: initial;
+        }
+        [data-theme='dark'] .theme-selector [data-value='dark'] {
+            display: initial;
+        }
+        [data-theme='light'] .theme-selector [data-value='light'] {
+            display: initial;
+        }
+
+        .tooltip {
+            position:relative; /* making the .tooltip span a container for the tooltip text */
+            border-bottom:1px dashed #000; /* little indicater to indicate it's hoverable */
+        }
+        .tooltip:before {
+            content: attr(data-text);
+            display: none;
+            position: absolute;
+            top: -10%;
+            width: 100%;
+            transform: translateY(-100%);
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            background: var(--color-background);
+            color: var(--color-text);
+            text-align: center;
+            padding: 1rem;
+        }
+        .tooltip:hover:before {
+            display:block;
+        }
+        /*GITHUB CORNER */
+        .github-corner:hover .octo-arm{
+            animation:octocat-wave 560ms ease-in-out
+        }
+        .github-corner > svg {
+            position: absolute;
+            top: 0;
+            border: 0;
+            right: 0;
+            fill: var(--color-text);
+            color:var(--color-link);
+
+        }
+        @keyframes octocat-wave{
+            0%,100%{transform:rotate(0)}
+            20%,60%{transform:rotate(-25deg)}
+            40%,80%{transform:rotate(10deg)}}
+        @media (max-width:500px){
+            .github-corner:hover .octo-arm{
+                animation:none
+            }
+            .github-corner .octo-arm{
+                animation:octocat-wave 560ms ease-in-out
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Lingon 🍒 Web</h1>
+    <h2>Convert kubernetes manifests from YAML to Go (golang) code.</h2>
+
+    <a href="https://github.com/volvo-cars/lingon" class="github-corner" aria-label="View source on GitHub">
+        <svg width="80" height="80" viewBox="0 0 250 250"  aria-hidden="true">
+            <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+            <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+            <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+        </svg>
+    </a>
+
+    <div class="intro">
+        <p>
+            <a href="https://github.com/volvo-cars/lingon">Lingon</a> is a library and command line tool to write HCL (<a href="https://www.terraform.io/" rel="nofollow">Terraform</a>)
+            and <a href="https://kubernetes.io" rel="nofollow">kubernetes</a> manifest (YAML) in Go.
+            <br><br>
+            This web app is an example of how to use the library to convert kubernetes manifests to Go code.
+            <br> <br>
+            <a href="https://pkg.go.dev/github.com/volvo-cars/lingon" rel="nofollow" style="text-decoration:none;">
+                <img src="https://camo.githubusercontent.com/f6d7ecb21c7406d8529f6dfbad91e283effa216f8d47d933c6dd1c07f0ccdbc8/68747470733a2f2f706b672e676f2e6465762f62616467652f6769746875622e636f6d2f766f6c766f2d636172732f6c696e676f6e2e737667" alt="Go Reference" data-canonical-src="https://pkg.go.dev/badge/github.com/volvo-cars/lingon.svg" style="max-width: 100%;">
+            </a>
+            <a href="https://goreportcard.com/report/github.com/volvo-cars/lingon" rel="nofollow" style="text-decoration:none;">
+                <img src="https://camo.githubusercontent.com/da58f1511e2e3b4a9cbb677d76aa1f5837e7b78ec3fc2aafae80f53fc081787c/68747470733a2f2f676f7265706f7274636172642e636f6d2f62616467652f6769746875622e636f6d2f766f6c766f2d636172732f6c696e676f6e" alt="GoReportCard example" data-canonical-src="https://goreportcard.com/badge/github.com/volvo-cars/lingon" style="max-width: 100%;">
+            </a>
+            <a href="https://opensource.org/licenses/Apache-2.0" rel="nofollow" style="text-decoration:none;">
+                <img src="https://camo.githubusercontent.com/684b80de8a7f9f15265f05513c5a770c2051df7278a2376368d2b489eba3efcc/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c6963656e73652d4170616368655f322e302d626c75652e737667" alt="License" data-canonical-src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" style="max-width: 100%;">
+            </a>
+            <br> <br>
+            See <a href="https://github.com/volvo-cars/lingon/blob/main/docs/rationale.md">Rationale</a> for why we built this.
+            <br> <br>
+
+            Lingon is not a platform, it is a library meant to be consumed in a Go application that platform engineers write to manage their platforms.
+            It is a tool to build and automate the creation and the management of platforms regardless of the target infrastructure and services.
+
+            <br> <br>Who is this for? <br> <br>
+
+            Lingon is aimed at people who need to automate the lifecycle of their cloud infrastructure
+            and have suffered the pain of configuration languages and complexity of gluing tools together with more tools.
+            <br> <br>
+            All the <a href="https://github.com/volvo-cars/lingon/blob/main/docs">Examples</a> are in the <a href="https://github.com/volvo-cars/lingon/blob/main/docs">documentation</a>.
+            <br> <br>
+            A big example is <a href="https://github.com/volvo-cars/lingon/blob/main/docs/platypus">Platypus</a> which shows how
+            the <a href="https://github.com/volvo-cars/lingon/blob/main/docs/kubernetes">kubernetes</a>
+            and <a href="https://github.com/volvo-cars/lingon/blob/main/docs/terraform">terraform</a> libraries can be used together.
+
+            <br> <br>
+
+            The output format is called <a href="https://pkg.go.dev/github.com/rogpeppe/go-internal@v1.10.0/txtar">txtar, short for text archive</a>.
+        </p>
+    </div>
+    <button class="theme-selector toggle-theme" aria-label="Toggle theme">
+        <!--        // copied from https://go.dev/play/-->
+        <img data-value="auto" class="go-Icon go-Icon--inverted" height="24" width="24"  alt="System theme" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIGhlaWdodD0nMjRweCcgdmlld0JveD0nMCAwIDI0IDI0JyB3aWR0aD0nMjRweCcgZmlsbD0nIzQ1NUE2NCc+PHBhdGggZD0nTTAgMGgyNHYyNEgwVjB6JyBmaWxsPSdub25lJy8+PHBhdGggZD0nTTIwIDE1LjMxTDIzLjMxIDEyIDIwIDguNjlWNGgtNC42OUwxMiAuNjkgOC42OSA0SDR2NC42OUwuNjkgMTIgNCAxNS4zMVYyMGg0LjY5TDEyIDIzLjMxIDE1LjMxIDIwSDIwdi00LjY5ek0xMiAxOFY2YzMuMzEgMCA2IDIuNjkgNiA2cy0yLjY5IDYtNiA2eicvPjwvc3ZnPg==">
+        <img data-value="dark" class="go-Icon go-Icon--inverted" height="24" width="24" alt="Dark theme" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIGhlaWdodD0nMjRweCcgdmlld0JveD0nMCAwIDI0IDI0JyB3aWR0aD0nMjRweCcgZmlsbD0nIzQ1NUE2NCc+PHBhdGggZD0nTTAgMGgyNHYyNEgwVjB6JyBmaWxsPSdub25lJy8+PHBhdGggZD0nTTEwIDJjLTEuODIgMC0zLjUzLjUtNSAxLjM1QzcuOTkgNS4wOCAxMCA4LjMgMTAgMTJzLTIuMDEgNi45Mi01IDguNjVDNi40NyAyMS41IDguMTggMjIgMTAgMjJjNS41MiAwIDEwLTQuNDggMTAtMTBTMTUuNTIgMiAxMCAyeicvPjwvc3ZnPg==">
+        <img data-value="light" class="go-Icon go-Icon--inverted" height="24" width="24" alt="Light theme" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIGVuYWJsZS1iYWNrZ3JvdW5kPSduZXcgMCAwIDI0IDI0JyBoZWlnaHQ9JzI0cHgnIHZpZXdCb3g9JzAgMCAyNCAyNCcgd2lkdGg9JzI0cHgnIGZpbGw9JyM0NTVBNjQnPjxyZWN0IGZpbGw9J25vbmUnIGhlaWdodD0nMjQnIHdpZHRoPScyNCcvPjxwYXRoIGQ9J00xMiw3Yy0yLjc2LDAtNSwyLjI0LTUsNXMyLjI0LDUsNSw1czUtMi4yNCw1LTVTMTQuNzYsNywxMiw3TDEyLDd6IE0yLDEzbDIsMGMwLjU1LDAsMS0wLjQ1LDEtMXMtMC40NS0xLTEtMWwtMiwwIGMtMC41NSwwLTEsMC40NS0xLDFTMS40NSwxMywyLDEzeiBNMjAsMTNsMiwwYzAuNTUsMCwxLTAuNDUsMS0xcy0wLjQ1LTEtMS0xbC0yLDBjLTAuNTUsMC0xLDAuNDUtMSwxUzE5LjQ1LDEzLDIwLDEzeiBNMTEsMnYyIGMwLDAuNTUsMC40NSwxLDEsMXMxLTAuNDUsMS0xVjJjMC0wLjU1LTAuNDUtMS0xLTFTMTEsMS40NSwxMSwyeiBNMTEsMjB2MmMwLDAuNTUsMC40NSwxLDEsMXMxLTAuNDUsMS0xdi0yYzAtMC41NS0wLjQ1LTEtMS0xIEMxMS40NSwxOSwxMSwxOS40NSwxMSwyMHogTTUuOTksNC41OGMtMC4zOS0wLjM5LTEuMDMtMC4zOS0xLjQxLDBjLTAuMzksMC4zOS0wLjM5LDEuMDMsMCwxLjQxbDEuMDYsMS4wNiBjMC4zOSwwLjM5LDEuMDMsMC4zOSwxLjQxLDBzMC4zOS0xLjAzLDAtMS40MUw1Ljk5LDQuNTh6IE0xOC4zNiwxNi45NWMtMC4zOS0wLjM5LTEuMDMtMC4zOS0xLjQxLDBjLTAuMzksMC4zOS0wLjM5LDEuMDMsMCwxLjQxIGwxLjA2LDEuMDZjMC4zOSwwLjM5LDEuMDMsMC4zOSwxLjQxLDBjMC4zOS0wLjM5LDAuMzktMS4wMywwLTEuNDFMMTguMzYsMTYuOTV6IE0xOS40Miw1Ljk5YzAuMzktMC4zOSwwLjM5LTEuMDMsMC0xLjQxIGMtMC4zOS0wLjM5LTEuMDMtMC4zOS0xLjQxLDBsLTEuMDYsMS4wNmMtMC4zOSwwLjM5LTAuMzksMS4wMywwLDEuNDFzMS4wMywwLjM5LDEuNDEsMEwxOS40Miw1Ljk5eiBNNy4wNSwxOC4zNiBjMC4zOS0wLjM5LDAuMzktMS4wMywwLTEuNDFjLTAuMzktMC4zOS0xLjAzLTAuMzktMS40MSwwbC0xLjA2LDEuMDZjLTAuMzksMC4zOS0wLjM5LDEuMDMsMCwxLjQxczEuMDMsMC4zOSwxLjQxLDBMNy4wNSwxOC4zNnonLz48L3N2Zz4=">
+    </button>
+
+    <p id="forerr" class="hide"></p>
+
+    <div class="buttons">
+    <a href="#" class="tooltip" data-text="this button will convert the YAML to Go code" onclick="convert()">
+        YAML ➡️ Go
+    </a>
+    <a href="#" class="tooltip" data-text="this button will copy the Go code to your clipboard" onclick="copyToClipboard()">
+        📋 copy to clipboard
+    </a>
+    </div>
+
+    <div class="container">
+        <div class="element ">
+            <label for="txtinput">Paste your YAML here</label>
+            <textarea id="txtinput"
+                      rows='20'
+                      data-min-rows='20'
+                      cols='120'
+                      data-min-cols="120"
+                      autocomplete="off"
+                      role="textbox"
+                      aria-autocomplete="list"
+            ></textarea>
+        </div>
+
+
+        <div class="element code">
+            <label for="result">Here you Go</label>
+            <pre id="result" class="result"></pre>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var devServer = "http://localhost:8080/";
+        var prodServer = location.href;
+        // when the dom is loaded, run the following code
+        document.addEventListener("DOMContentLoaded", loaded);
+
+        var txtarea = document.getElementById("txtinput")
+        var result = document.getElementById("result")
+
+        function loaded(){
+            // set content to text area as an example
+            txtarea.value = `---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: monitoring
+  labels:
+    helm.sh/chart: grafana-6.50.7
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/instance: grafana
+    app.kubernetes.io/version: "9.3.6"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - name: service
+      port: 80
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/instance: grafana
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: webapp
+  name: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+        - image: nginx
+          name: nginx
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+
+---
+`
+            setThemeButtons();
+            convert()
+        }
+
+
+        function displayErr(info) {
+            return (err) => {
+                msg = err.message || err
+                var f = document.getElementById("forerr")
+                f.textContent = info+": "+ msg
+                f.classList.remove("hide")
+                console.error(err)
+            }
+        }
+
+        function run(msg) {
+            try {
+                const url = getHost() + "convert"
+                return digestMessage(msg)
+                    .then((digest) => ({
+                            method: "POST",
+                            headers: {"Content-Type": "application/json"},
+                            body: JSON.stringify({
+                                meta: {
+                                    "uuid": crypto.randomUUID(),
+                                    "digest": digest,
+                                    "length": ""+msg.length, //send it as a string
+                                    "verbose": true,
+                                    "removeappname": false,
+                                    "groupbykind": true,
+                                    "addmethods": true,
+                                    "ignoreerrors": false,
+                                },
+                                data: msg,
+                            }),
+                        })
+                    )
+                    .then((options) => fetch(url, options))
+                    .then((response) => response.json())
+                    .then((data) => {
+                        data?.meta?.logs && console.log({logs: data.meta.logs})
+                        if (data?.errors) {
+                            displayErr("server")(data.errors)
+                        }
+                        result.textContent = data?.data
+
+                    })
+                    .catch(displayErr("request"))
+            } catch (err) {
+                displayErr("try catch")(err)
+            }
+        }
+
+        function convert() {
+            const yaml = txtarea.value
+            if (!yaml) {
+                return
+            }
+            return run(yaml)
+        }
+
+        function getHost() {
+            if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+                return devServer;
+            } else {
+                return prodServer;
+            }
+        }
+
+        async function digestMessage(message) {
+            // taken from https://developer.mozilla.org/en-US/docs/web/api/subtlecrypto/digest#examples
+            const msgUint8 = new TextEncoder().encode(message); // encode as (utf-8) Uint8Array
+            const hashBuffer = await crypto.subtle.digest("SHA-256", msgUint8); // hash the message
+            return Array.from(new Uint8Array(hashBuffer))
+                .map((b) => b.toString(16).padStart(2, "0")) // convert to hex string
+                .join("");
+        }
+
+        function setThemeButtons() {
+            // copied from https://go.dev/play/
+            for (const el of document.querySelectorAll('.toggle-theme')) {
+                el.addEventListener('click', () => {
+                    toggleTheme();
+                });
+            }
+        }
+
+        function toggleTheme() {
+            // copied from https://go.dev/play/
+            let nextTheme = 'dark';
+            const theme = document.documentElement.getAttribute('data-theme');
+            if (theme === 'dark') {
+                nextTheme = 'light';
+            } else if (theme === 'light') {
+                nextTheme = 'auto';
+            }
+            document.documentElement.setAttribute('data-theme', nextTheme);
+        }
+
+        function copyToClipboard() {
+            let preText = document.getElementById("result").textContent;
+            navigator.clipboard.writeText(preText).then(() => {
+                document.getElementById("forerr").textContent = "Copied to clipboard ✅";
+                console.log("Copied to clipboard");
+            }, () => {
+                document.getElementById("forerr").textContent = "Failed to copy to clipboard ❌";
+
+                console.error("Failed to copy to clipboard");
+            });
+        }
+
+    </script>
+</body>
+</html>
