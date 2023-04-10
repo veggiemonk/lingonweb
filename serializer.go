@@ -23,14 +23,13 @@ import (
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 	clientgoscheme "k8s.io/client-go/kubernetes/scheme"
 	knativecachingalpha1 "knative.dev/caching/pkg/apis/caching/v1alpha1"
+	knativeservingv1 "knative.dev/serving/pkg/apis/serving/v1"
 	gatewayv1alpha2 "sigs.k8s.io/gateway-api/apis/v1alpha2"
 	gatewayv1beta1 "sigs.k8s.io/gateway-api/apis/v1beta1"
 	secretsstorev1 "sigs.k8s.io/secrets-store-csi-driver/apis/v1"
 )
 
 var (
-	// deserializer = clientgoscheme.Codecs.UniversalDecoder(scheme.)
-	// scheme = runtime.NewScheme()
 	Scheme = runtime.NewScheme()
 	Codecs = serializer.NewCodecFactory(Scheme)
 )
@@ -62,6 +61,7 @@ func init() {
 	utilruntime.Must(servingv1alpha1.AddToScheme(Scheme))
 	utilruntime.Must(kservev1alpha1.AddToScheme(Scheme))
 	utilruntime.Must(knativecachingalpha1.AddToScheme(Scheme))
+	utilruntime.Must(knativeservingv1.AddToScheme(Scheme))
 
 	// KUBEFLOW
 	utilruntime.Must(profilev1.AddToScheme(Scheme))
@@ -85,57 +85,4 @@ func init() {
 	utilruntime.Must(tektonpipelinesv1.AddToScheme(Scheme))
 	utilruntime.Must(tektontriggersv1alpha1.AddToScheme(Scheme))
 
-}
-
-func defaultSerializer() runtime.Decoder {
-	// KUBERNETES
-	utilruntime.Must(clientgoscheme.AddToScheme(clientgoscheme.Scheme))
-	utilruntime.Must(apiextensions.AddToScheme(clientgoscheme.Scheme))
-	utilruntime.Must(apiextensionsv1.AddToScheme(clientgoscheme.Scheme))
-
-	// CERT MANAGER
-	utilruntime.Must(certmanager.AddToScheme(clientgoscheme.Scheme))
-
-	// CILIUM
-	// utilruntime.Must(ciliumv2.AddToScheme(clientgoscheme.Scheme))
-
-	// EXTERNAL SECRETS
-	utilruntime.Must(externalsecretsv1beta1.AddToScheme(clientgoscheme.Scheme))
-
-	// GATEWAY API
-	utilruntime.Must(gatewayv1alpha2.AddToScheme(clientgoscheme.Scheme))
-	utilruntime.Must(gatewayv1beta1.AddToScheme(clientgoscheme.Scheme))
-
-	// KARPENTER
-	utilruntime.Must(karpenterv1alpha5.AddToScheme(clientgoscheme.Scheme))
-	utilruntime.Must(karpenterapi.AddToScheme(clientgoscheme.Scheme))
-
-	// KNATIVE
-	utilruntime.Must(servingv1alpha1.AddToScheme(clientgoscheme.Scheme))
-	utilruntime.Must(kservev1alpha1.AddToScheme(clientgoscheme.Scheme))
-	utilruntime.Must(knativecachingalpha1.AddToScheme(clientgoscheme.Scheme))
-
-	// KUBEFLOW
-	utilruntime.Must(profilev1.AddToScheme(clientgoscheme.Scheme))
-	utilruntime.Must(profilev1beta1.AddToScheme(clientgoscheme.Scheme))
-
-	// ISTIO
-	utilruntime.Must(istionetworkingv1beta1.AddToScheme(clientgoscheme.Scheme))
-	utilruntime.Must(istiosecurityv1beta1.AddToScheme(clientgoscheme.Scheme))
-	utilruntime.Must(istionetworkingv1alpha3.AddToScheme(clientgoscheme.Scheme))
-
-	// OTEL
-	utilruntime.Must(otelv1alpha1.AddToScheme(clientgoscheme.Scheme))
-
-	// SECRET STORE
-	utilruntime.Must(secretsstorev1.AddToScheme(clientgoscheme.Scheme))
-
-	// SLOTH
-	utilruntime.Must(slothv1alpha1.AddToScheme(clientgoscheme.Scheme))
-
-	// TEKTON
-	utilruntime.Must(tektonpipelinesv1.AddToScheme(clientgoscheme.Scheme))
-	utilruntime.Must(tektontriggersv1alpha1.AddToScheme(clientgoscheme.Scheme))
-
-	return clientgoscheme.Codecs.UniversalDeserializer()
 }

@@ -23,6 +23,7 @@ require (
 	k8s.io/apimachinery v0.26.3
 	k8s.io/client-go v0.26.3
 	knative.dev/caching v0.0.0-20220818010648-9df7bb739739
+	knative.dev/serving v0.34.0
 	sigs.k8s.io/gateway-api v0.6.0
 	sigs.k8s.io/secrets-store-csi-driver v1.3.2
 
@@ -124,8 +125,8 @@ require (
 	k8s.io/kube-aggregator v0.26.0 // indirect
 	k8s.io/kube-openapi v0.0.0-20230308215209-15aac26d736a // indirect
 	k8s.io/utils v0.0.0-20230313181309-38a27ef9d749 // indirect
+	knative.dev/networking v0.0.0-20220818010248-e51df7cdf571 // indirect
 	knative.dev/pkg v0.0.0-20230224205330-75da922ef055 // indirect
-	knative.dev/serving v0.34.0 // indirect
 	mvdan.cc/gofumpt v0.4.0 // indirect
 	sigs.k8s.io/controller-runtime v0.14.5 // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect

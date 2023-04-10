@@ -790,6 +790,7 @@ knative.dev/caching v0.0.0-20220818010648-9df7bb739739 h1:SS824wVH+IFmNDnTNFNOxf
 knative.dev/caching v0.0.0-20220818010648-9df7bb739739/go.mod h1:q5//FJ59aFRK42YiLSaxgBzH18DBhrtSc7UWapwXT9Q=
 knative.dev/eventing v0.30.1-0.20220407170245-58865afba92c h1:5QvWwe3uB7BefHGMg6hC05YVi+zr1kGK7DVMFquqJMI=
 knative.dev/networking v0.0.0-20220818010248-e51df7cdf571 h1:Lu/TsJjxg1p+2CMr2LNHEdEFBNHYjDoZv2f1QZoM8jg=
+knative.dev/networking v0.0.0-20220818010248-e51df7cdf571/go.mod h1:m3ataWRwmbHjOY9sCFvcDWRNLVITxVl0fH0RxdCa4jE=
 knative.dev/pkg v0.0.0-20230224205330-75da922ef055 h1:VfKOAnbgJXJMz7n66yW7Rj6Sl2bQZng6RzvX4MMB2Jg=
 knative.dev/pkg v0.0.0-20230224205330-75da922ef055/go.mod h1:QkgVAUCziNOZmoqL/E25ig2cbVQ2teZyGNCNqaApO44=
 knative.dev/serving v0.34.0 h1:x3fS4e0AcNBBlQv5Dd5y30W2gtrxndUEwIEPknZfeVg=
