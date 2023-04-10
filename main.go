@@ -48,7 +48,7 @@ func main() {
 func run(log *slog.Logger) error {
 	cfg := struct {
 		conf.Version
-		Port            int           `conf:"default:8080"`
+		Port            int           `conf:"default:8080,env:PORT"`
 		Host            string        `conf:"default:0.0.0.0"`
 		ReadTimeout     time.Duration `conf:"default:5s"`
 		WriteTimeout    time.Duration `conf:"default:10s"`
