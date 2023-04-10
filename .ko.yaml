@@ -13,6 +13,6 @@ builds:
         -X main.date={{ .Env.Date }}
         -X main.builtBy=ko
 
-defaultPlatforms:
-  - linux/arm64
-  - linux/amd64
+#defaultPlatforms:
+#  - linux/amd64
+#  - linux/arm64
