@@ -20,7 +20,7 @@ func main() {
 	stopChan := make(chan os.Signal, 1)
 	signal.Notify(
 		stopChan,
-		syscall.SIGKILL, // never gets caught on POSIX
+		// syscall.SIGKILL, // never gets caught on POSIX
 		syscall.SIGINT,
 		syscall.SIGTERM,
 		syscall.SIGQUIT,
@@ -29,7 +29,7 @@ func main() {
 
 	sm.Handle("/", l{})
 	srv := &http.Server{
-		Addr:    ":8081",
+		Addr:    port,
 		Handler: sm,
 	}
 	log.Println("serving on", port)
@@ -55,6 +55,6 @@ func main() {
 type l struct{}
 
 func (b l) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	log.Printf("[%s] serving", time.Now().Format(time.RFC3339), r.URL.Path)
+	log.Printf("[%s] serving %s\n", time.Now().Format(time.RFC3339), r.URL.Path)
 	http.FileServer(http.Dir(".")).ServeHTTP(w, r)
 }

@@ -1,0 +1,18 @@
+builds:
+  - id: lingonweb
+    dir: .
+    main: ./main.go
+    flags:
+      - -trimpath
+    ldflags:
+      - >
+        -s -w
+        -extldflags "-static"
+        -X main.version={{ .Env.Version }}
+        -X main.commit={{ .Env.Commit }}
+        -X main.date={{ .Env.Date }}
+        -X main.builtBy=ko
+
+defaultPlatforms:
+  - linux/arm64
+  - linux/amd64
