@@ -49,3 +49,8 @@ func main() {
 }
 
 ```
+
+## Screenshot
+
+
+<p align="center"><img src="https://raw.githubusercontent.com/veggiemonk/lingonweb/main/lingonweb.png"></p>
