@@ -16,7 +16,7 @@ import (
 
 type Meta struct {
 	Length        string  `json:"length,omitempty"`
-	Uuid          string  `json:"uuid,omitempty"`
+	UUID          string  `json:"uuid,omitempty"`
 	Digest        []uint8 `json:"digest,omitempty"`
 	AddMethods    bool    `json:"addmethods"`
 	GroupByKind   bool    `json:"groupbykind"`
@@ -30,7 +30,7 @@ type Input struct {
 }
 type MetaOut struct {
 	Length string  `json:"length,omitempty"`
-	Uuid   string  `json:"uuid,omitempty"`
+	UUID   string  `json:"uuid,omitempty"`
 	Digest []uint8 `json:"digest,omitempty"`
 	Logs   string  `json:"logs,omitempty"`
 }
@@ -131,7 +131,7 @@ func convert(log *slog.Logger) http.HandlerFunc {
 			o := Output{
 				Meta: MetaOut{
 					Length: fmt.Sprintf("%d", resw.Len()),
-					Uuid:   msg.Meta.Uuid,
+					UUID:   msg.Meta.UUID,
 					Digest: []byte(fmt.Sprintf(
 						"%x",
 						sha256.Sum256(resw.Bytes()),
@@ -148,7 +148,7 @@ func convert(log *slog.Logger) http.HandlerFunc {
 		out := Output{
 			Meta: MetaOut{
 				Length: fmt.Sprintf("%d", resw.Len()),
-				Uuid:   msg.Meta.Uuid,
+				UUID:   msg.Meta.UUID,
 				Digest: []byte(fmt.Sprintf("%x", sha256.Sum256(resw.Bytes()))),
 				Logs:   lb.String(),
 			},

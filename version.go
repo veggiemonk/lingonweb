@@ -23,6 +23,25 @@ type V struct {
 }
 
 func VersionInfo(w http.ResponseWriter, r *http.Request) {
+	// Set the CORS headers to the response.
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set(
+		"Access-Control-Allow-Methods",
+		"GET, OPTIONS",
+	)
+	w.Header().Set(
+		"Access-Control-Allow-Headers",
+		"Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization",
+	)
+	if r.Method == http.MethodOptions {
+		return
+	}
+
+	if r.Method != http.MethodGet {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+
 	bi, ok := debug.ReadBuildInfo()
 	if !ok {
 		_, _ = fmt.Fprintln(os.Stderr, "error reading build-info")
@@ -34,6 +53,7 @@ func VersionInfo(w http.ResponseWriter, r *http.Request) {
 		Date:      date,
 		BuildInfo: *bi,
 	}
+	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(v); err != nil {
 		_, _ = fmt.Fprintf(os.Stderr, "error encoding version: %v", err)
 		_, _ = fmt.Fprintf(w, "error encoding version: %v", err)
