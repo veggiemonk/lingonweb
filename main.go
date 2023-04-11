@@ -96,6 +96,7 @@ func run(log *slog.Logger) error {
 	sm.HandleFunc(cfg.HealthPath, healthz)
 	//
 	// // static files when embedding a whole directory
+	// // but we only want to serve index.html
 	//
 	// static, err := fs.Sub(webapp, "embed")
 	// if err != nil {

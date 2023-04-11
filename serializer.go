@@ -34,6 +34,7 @@ var (
 	Codecs = serializer.NewCodecFactory(Scheme)
 )
 
+// ADD MORE TYPES / CRDs HERE
 func init() {
 	// KUBERNETES
 	utilruntime.Must(clientgoscheme.AddToScheme(Scheme))
@@ -44,7 +45,7 @@ func init() {
 	utilruntime.Must(certmanager.AddToScheme(Scheme))
 
 	// CILIUM
-	// utilruntime.Must(ciliumv2.AddToScheme(Scheme)) // dependency ongithub.com/optiopay/kafka and has CVEs
+	// utilruntime.Must(ciliumv2.AddToScheme(Scheme)) // dependency on github.com/optiopay/kafka and has CVEs
 
 	// EXTERNAL SECRETS
 	utilruntime.Must(externalsecretsv1beta1.AddToScheme(Scheme))
