@@ -53,4 +53,6 @@ func main() {
 ## Screenshot
 
 
-<p align="center"><img src="https://raw.githubusercontent.com/veggiemonk/lingonweb/main/lingonweb.png"></p>
+<p align="center">
+<img src="https://user-images.githubusercontent.com/5487021/231055446-49ea2307-e16a-47ce-95e9-8ad11c24df73.png" alt="lingon webapp screenshot">
+</p>
