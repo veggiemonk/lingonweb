@@ -14,7 +14,7 @@ import (
 	"syscall"
 	"time"
 
-	conf "github.com/ardanlabs/conf/v3"
+	"github.com/ardanlabs/conf/v3"
 	_ "go.uber.org/automaxprocs"
 	"golang.org/x/exp/slog"
 )
@@ -37,7 +37,7 @@ func main() {
 	log := makeLogger(os.Stderr)
 
 	if err := run(log); err != nil {
-		log.Error("startup", "err", err)
+		log.Error("run", "err", err)
 		os.Exit(1) //nolint:gocritic
 	}
 }
