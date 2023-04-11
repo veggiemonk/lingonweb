@@ -367,16 +367,24 @@
             // set content to text area as an example
             txtarea.value = `---
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lingon-config
+  namespace: not-a-trick
+data:
+  # Those comments are really useful sometimes
+  show-comments: "true"
+  # But if you need more examples
+  # we got you covered
+  # See https://github.com/volvo-cars/lingon/ for more
+  # info.
+  this-has-examples: "true"
+---
+apiVersion: v1
 kind: Service
 metadata:
-  name: grafana
-  namespace: monitoring
-  labels:
-    helm.sh/chart: grafana-6.50.7
-    app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: grafana
-    app.kubernetes.io/version: "9.3.6"
-    app.kubernetes.io/managed-by: Helm
+  name: why-build-this
+  namespace: we-needed-more-control
 spec:
   type: ClusterIP
   ports:
@@ -385,25 +393,25 @@ spec:
       protocol: TCP
       targetPort: 3000
   selector:
-    app.kubernetes.io/name: grafana
-    app.kubernetes.io/instance: grafana
+    app.kubernetes.io/name: lingon
+    app.kubernetes.io/instance: lingon
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: webapp
-  name: webapp
+    app: resource-requests
+  name: were-tough-to-parse
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: webapp
+      app: lingon
   strategy: {}
   template:
     metadata:
       labels:
-        app: webapp
+        app: lingon
     spec:
       containers:
         - image: nginx
@@ -415,7 +423,39 @@ spec:
             limits:
               memory: "1Gi"
               cpu: "500m"
-
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: support.crd.too
+spec:
+  group: crd.too
+  preserveUnknownFields: false
+  versions:
+    - name: v1beta1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          x-kubernetes-preserve-unknown-fields: true
+      subresources:
+        status: {}
+  names:
+    kind: LingonTask
+    plural: lingontasks
+    singular: lingontask
+    categories:
+      - lingon
+  scope: Cluster
+  conversion:
+    strategy: Webhook
+    webhook:
+      conversionReviewVersions: ["v1beta1"]
+      clientConfig:
+        service:
+          name: lingon-webhook
+          namespace: lingon
 ---
 `
             setThemeButtons();
