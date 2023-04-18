@@ -5,6 +5,12 @@ import (
 	karpenterapi "github.com/aws/karpenter/pkg/apis"
 	certmanager "github.com/cert-manager/cert-manager/pkg/api"
 	externalsecretsv1beta1 "github.com/external-secrets/external-secrets/apis/externalsecrets/v1beta1"
+	helmv2 "github.com/fluxcd/helm-controller/api/v2beta1"
+	imageautov1 "github.com/fluxcd/image-automation-controller/api/v1beta1"
+	imagereflectv1 "github.com/fluxcd/image-reflector-controller/api/v1beta2"
+	kustomizev1 "github.com/fluxcd/kustomize-controller/api/v1beta2"
+	notificationv1b2 "github.com/fluxcd/notification-controller/api/v1beta2"
+	sourcev1 "github.com/fluxcd/source-controller/api/v1"
 	kservev1alpha1 "github.com/kserve/kserve/pkg/apis/serving/v1alpha1"
 	servingv1alpha1 "github.com/kserve/modelmesh-serving/apis/serving/v1alpha1"
 	profilev1 "github.com/kubeflow/kubeflow/components/profile-controller/api/v1"
@@ -68,6 +74,14 @@ func init() {
 	utilruntime.Must(profilev1.AddToScheme(Scheme))
 	utilruntime.Must(profilev1beta1.AddToScheme(Scheme))
 
+	// FLUXCD
+	utilruntime.Must(kustomizev1.AddToScheme(Scheme))
+	utilruntime.Must(helmv2.AddToScheme(Scheme))
+	utilruntime.Must(notificationv1b2.AddToScheme(Scheme))
+	utilruntime.Must(imagereflectv1.AddToScheme(Scheme))
+	utilruntime.Must(imageautov1.AddToScheme(Scheme))
+	utilruntime.Must(sourcev1.AddToScheme(Scheme))
+
 	// ISTIO
 	utilruntime.Must(istionetworkingv1beta1.AddToScheme(Scheme))
 	utilruntime.Must(istiosecurityv1beta1.AddToScheme(Scheme))
@@ -85,5 +99,4 @@ func init() {
 	// TEKTON
 	utilruntime.Must(tektonpipelinesv1.AddToScheme(Scheme))
 	utilruntime.Must(tektontriggersv1alpha1.AddToScheme(Scheme))
-
 }
