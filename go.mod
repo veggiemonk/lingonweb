@@ -30,6 +30,7 @@ require (
 	k8s.io/client-go v0.26.3
 	knative.dev/caching v0.0.0-20220818010648-9df7bb739739
 	knative.dev/serving v0.34.0
+	sigs.k8s.io/cluster-api-addon-provider-helm v0.1.0-alpha.4
 	sigs.k8s.io/gateway-api v0.6.0
 	sigs.k8s.io/secrets-store-csi-driver v1.3.2
 
@@ -46,6 +47,7 @@ require (
 	github.com/antlr/antlr4/runtime/Go/antlr v1.4.10 // indirect
 	github.com/aws/aws-sdk-go v1.44.220 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
+	github.com/blang/semver v3.5.1+incompatible // indirect
 	github.com/blendle/zapdriver v1.3.1 // indirect
 	github.com/census-instrumentation/opencensus-proto v0.4.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
@@ -93,7 +95,6 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
-	github.com/onsi/ginkgo/v2 v2.9.2 // indirect
 	github.com/onsi/gomega v1.27.6 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
@@ -141,6 +142,7 @@ require (
 	knative.dev/networking v0.0.0-20220818010248-e51df7cdf571 // indirect
 	knative.dev/pkg v0.0.0-20230224205330-75da922ef055 // indirect
 	mvdan.cc/gofumpt v0.4.0 // indirect
+	sigs.k8s.io/cluster-api v1.4.1 // indirect
 	sigs.k8s.io/controller-runtime v0.14.6 // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.3 // indirect

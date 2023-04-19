@@ -30,6 +30,7 @@ import (
 	clientgoscheme "k8s.io/client-go/kubernetes/scheme"
 	knativecachingalpha1 "knative.dev/caching/pkg/apis/caching/v1alpha1"
 	knativeservingv1 "knative.dev/serving/pkg/apis/serving/v1"
+	capiahelm "sigs.k8s.io/cluster-api-addon-provider-helm/api/v1alpha1"
 	gatewayv1alpha2 "sigs.k8s.io/gateway-api/apis/v1alpha2"
 	gatewayv1beta1 "sigs.k8s.io/gateway-api/apis/v1beta1"
 	secretsstorev1 "sigs.k8s.io/secrets-store-csi-driver/apis/v1"
@@ -81,6 +82,8 @@ func init() {
 	utilruntime.Must(imagereflectv1.AddToScheme(Scheme))
 	utilruntime.Must(imageautov1.AddToScheme(Scheme))
 	utilruntime.Must(sourcev1.AddToScheme(Scheme))
+
+	utilruntime.Must(capiahelm.AddToScheme(Scheme))
 
 	// ISTIO
 	utilruntime.Must(istionetworkingv1beta1.AddToScheme(Scheme))
