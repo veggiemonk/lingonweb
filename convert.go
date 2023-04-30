@@ -67,18 +67,17 @@ func convert(log *slog.Logger) http.HandlerFunc {
 			}
 		}(r.Body)
 
-		var buf bytes.Buffer
-		if _, err := io.Copy(&buf, r.Body); err != nil {
+		body, err := io.ReadAll(r.Body)
+		if err != nil {
 			log.Error("read body", "err", err)
 			w.WriteHeader(http.StatusBadRequest)
 			_, _ = w.Write(
 				[]byte(fmt.Sprintf("{\"errors\":%q}", err.Error())),
 			)
-			return
 		}
 
 		var msg Input
-		if err := json.NewDecoder(&buf).Decode(&msg); err != nil {
+		if err := json.NewDecoder(bytes.NewReader(body)).Decode(&msg); err != nil {
 			log.Error("failed to decode body", "err", err)
 			w.WriteHeader(http.StatusBadRequest)
 			_, _ = w.Write(

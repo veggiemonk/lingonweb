@@ -476,6 +476,8 @@ spec:
         }
 
         function run(msg) {
+            var f = document.getElementById("forerr")
+            f.classList.add("hide")
             try {
                 const url = getHost() + "convert"
                 return digestMessage(msg)
@@ -488,7 +490,7 @@ spec:
                                     "digest": digest,
                                     "length": ""+msg.length, //send it as a string
                                     "verbose": true,
-                                    "removeappname": false,
+                                    "removeappname": true,
                                     "groupbykind": true,
                                     "addmethods": true,
                                     "ignoreerrors": false,

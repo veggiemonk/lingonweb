@@ -11,8 +11,8 @@ import (
 var (
 	// ldflags
 	version = "dev"
-	commit  = "none"
-	date    = "unknown"
+	commit  = "dev"
+	date    = "dev"
 )
 
 type V struct {

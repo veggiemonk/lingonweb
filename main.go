@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	_ "net/http/pprof"
 	"os"
 	"os/signal"
 	"path/filepath"
@@ -82,11 +83,16 @@ func run(log *slog.Logger) error {
 	)
 
 	ms := &runtime.MemStats{}
+	cfgStr, err := conf.String(&cfg)
+	if err != nil {
+		return fmt.Errorf("config: %w", err)
+	}
 	runtime.ReadMemStats(ms)
 	log.Info(
 		fmt.Sprintf("Starting service... %d", time.Now().UTC().Unix()),
 		slog.Int("CPU cores", runtime.NumCPU()),
 		slog.String("Available Memory", fmt.Sprintf("%d MB", ms.Sys/1024)),
+		slog.String("config", cfgStr),
 	)
 	defer log.Info("Service stopped")
 
