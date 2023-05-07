@@ -15,6 +15,7 @@ import (
 	servingv1alpha1 "github.com/kserve/modelmesh-serving/apis/serving/v1alpha1"
 	profilev1 "github.com/kubeflow/kubeflow/components/profile-controller/api/v1"
 	profilev1beta1 "github.com/kubeflow/kubeflow/components/profile-controller/api/v1beta1"
+	jetstream "github.com/nats-io/nack/pkg/jetstream/apis/jetstream/v1beta2"
 	otelv1alpha1 "github.com/open-telemetry/opentelemetry-operator/apis/v1alpha1"
 	slothv1alpha1 "github.com/slok/sloth/pkg/kubernetes/api/sloth/v1"
 	tektonpipelinesv1 "github.com/tektoncd/pipeline/pkg/apis/pipeline/v1"
@@ -60,6 +61,9 @@ func init() {
 	// GATEWAY API
 	utilruntime.Must(gatewayv1alpha2.AddToScheme(Scheme))
 	utilruntime.Must(gatewayv1beta1.AddToScheme(Scheme))
+
+	// NATS JETSTREAM
+	utilruntime.Must(jetstream.AddToScheme(Scheme))
 
 	// KARPENTER
 	utilruntime.Must(karpenterv1alpha5.AddToScheme(Scheme))
