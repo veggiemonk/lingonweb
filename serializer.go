@@ -4,6 +4,8 @@ import (
 	karpenterv1alpha5 "github.com/aws/karpenter-core/pkg/apis"
 	karpenterapi "github.com/aws/karpenter/pkg/apis"
 	certmanager "github.com/cert-manager/cert-manager/pkg/api"
+	ciliumv2 "github.com/cilium/cilium/pkg/k8s/apis/cilium.io/v2"
+	ciliumv2alpha1 "github.com/cilium/cilium/pkg/k8s/apis/cilium.io/v2alpha1"
 	externalsecretsv1beta1 "github.com/external-secrets/external-secrets/apis/externalsecrets/v1beta1"
 	helmv2 "github.com/fluxcd/helm-controller/api/v2beta1"
 	imageautov1 "github.com/fluxcd/image-automation-controller/api/v1beta1"
@@ -53,7 +55,8 @@ func init() {
 	utilruntime.Must(certmanager.AddToScheme(Scheme))
 
 	// CILIUM
-	// utilruntime.Must(ciliumv2.AddToScheme(Scheme)) // dependency on github.com/optiopay/kafka and has CVEs
+	utilruntime.Must(ciliumv2.AddToScheme(Scheme))
+	utilruntime.Must(ciliumv2alpha1.AddToScheme(Scheme))
 
 	// EXTERNAL SECRETS
 	utilruntime.Must(externalsecretsv1beta1.AddToScheme(Scheme))
