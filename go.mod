@@ -15,11 +15,13 @@ require (
 	github.com/fluxcd/kustomize-controller/api v0.35.1
 	github.com/fluxcd/notification-controller/api v0.33.0
 	github.com/fluxcd/source-controller/api v1.0.0-rc.1
+	github.com/grafana-operator/grafana-operator/v5 v5.0.0-rc2
 	github.com/kserve/kserve v0.10.1
 	github.com/kserve/modelmesh-serving v0.10.0
 	github.com/kubeflow/kubeflow/components/profile-controller v0.0.0-20230417162520-d0df9b1124fa
 	github.com/nats-io/nack v0.10.1
 	github.com/open-telemetry/opentelemetry-operator v1.51.0
+	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.60.1
 	github.com/slok/sloth v0.11.0
 	github.com/tektoncd/pipeline v0.47.0
 	github.com/tektoncd/triggers v0.23.1
@@ -125,6 +127,7 @@ require (
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/oklog/ulid v1.3.1 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
+	github.com/openshift/api v3.9.0+incompatible // indirect
 	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect
 	github.com/pelletier/go-toml/v2 v2.0.7 // indirect
 	github.com/petermattis/goid v0.0.0-20180202154549-b0b1615b78e5 // indirect

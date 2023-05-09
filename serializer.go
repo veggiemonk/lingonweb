@@ -13,12 +13,14 @@ import (
 	kustomizev1 "github.com/fluxcd/kustomize-controller/api/v1beta2"
 	notificationv1b2 "github.com/fluxcd/notification-controller/api/v1beta2"
 	sourcev1 "github.com/fluxcd/source-controller/api/v1"
+	grafanav1beta1 "github.com/grafana-operator/grafana-operator/v5/api/v1beta1"
 	kservev1alpha1 "github.com/kserve/kserve/pkg/apis/serving/v1alpha1"
 	servingv1alpha1 "github.com/kserve/modelmesh-serving/apis/serving/v1alpha1"
 	profilev1 "github.com/kubeflow/kubeflow/components/profile-controller/api/v1"
 	profilev1beta1 "github.com/kubeflow/kubeflow/components/profile-controller/api/v1beta1"
 	jetstream "github.com/nats-io/nack/pkg/jetstream/apis/jetstream/v1beta2"
 	otelv1alpha1 "github.com/open-telemetry/opentelemetry-operator/apis/v1alpha1"
+	prometheusv1 "github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring/v1"
 	slothv1alpha1 "github.com/slok/sloth/pkg/kubernetes/api/sloth/v1"
 	tektonpipelinesv1 "github.com/tektoncd/pipeline/pkg/apis/pipeline/v1"
 	tektontriggersv1alpha1 "github.com/tektoncd/triggers/pkg/apis/triggers/v1alpha1"
@@ -96,6 +98,12 @@ func init() {
 	utilruntime.Must(istionetworkingv1beta1.AddToScheme(Scheme))
 	utilruntime.Must(istiosecurityv1beta1.AddToScheme(Scheme))
 	utilruntime.Must(istionetworkingv1alpha3.AddToScheme(Scheme))
+
+	// GRAFANA
+	utilruntime.Must(grafanav1beta1.AddToScheme(Scheme))
+
+	// PROMETHEUS
+	utilruntime.Must(prometheusv1.AddToScheme(Scheme))
 
 	// OTEL
 	utilruntime.Must(otelv1alpha1.AddToScheme(Scheme))
