@@ -10,6 +10,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/veggiemonk/lingonweb/knowntypes"
 	"github.com/volvo-cars/lingon/pkg/kube"
 	"golang.org/x/exp/slog"
 )
@@ -119,7 +120,7 @@ func convert(log *slog.Logger) http.HandlerFunc {
 			kube.WithImportLogger(nl), // send this to the client
 			kube.WithImportAppName(serviceName),
 			kube.WithImportPackageName(serviceName),
-			kube.WithImportSerializer(Codecs.UniversalDeserializer()),
+			kube.WithImportSerializer(knowntypes.Codecs.UniversalDeserializer()),
 			kube.WithImportVerbose(msg.Meta.Verbose),
 			kube.WithImportGroupByKind(msg.Meta.GroupByKind),
 			kube.WithImportAddMethods(msg.Meta.AddMethods),

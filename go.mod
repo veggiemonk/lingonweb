@@ -29,9 +29,12 @@ require (
 	go.uber.org/automaxprocs v1.5.2
 	golang.org/x/exp v0.0.0-20230425010034-47ecfdc1ba53
 	istio.io/client-go v1.17.1
+	k8s.io/api v0.27.1
 	k8s.io/apiextensions-apiserver v0.27.1
 	k8s.io/apimachinery v0.27.1
+	k8s.io/apiserver v0.27.1
 	k8s.io/client-go v1.5.2
+	k8s.io/kube-aggregator v0.27.1
 	knative.dev/caching v0.0.0-20230428120151-d563a6163387
 	knative.dev/serving v0.37.0
 	sigs.k8s.io/cluster-api-addon-provider-helm v0.1.0-alpha.5
@@ -189,10 +192,8 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	istio.io/api v0.0.0-20230427165030-eeaf63b7920f // indirect
-	k8s.io/api v0.27.1 // indirect
 	k8s.io/component-base v0.27.1 // indirect
 	k8s.io/klog/v2 v2.90.1 // indirect
-	k8s.io/kube-aggregator v0.27.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20230426210814-b0c0aaee3cc0 // indirect
 	k8s.io/utils v0.0.0-20230406110748-d93618cff8a2 // indirect
 	knative.dev/networking v0.0.0-20230428120551-68725bdd1056 // indirect
