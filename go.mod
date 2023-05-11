@@ -25,7 +25,7 @@ require (
 	github.com/slok/sloth v0.11.0
 	github.com/tektoncd/pipeline v0.47.0
 	github.com/tektoncd/triggers v0.23.1
-	github.com/volvo-cars/lingon v0.0.0-20230429195837-56a4c40f8938
+	github.com/volvo-cars/lingon v0.0.0-20230511210139-da86ebf7dc33
 	go.uber.org/automaxprocs v1.5.2
 	golang.org/x/exp v0.0.0-20230425010034-47ecfdc1ba53
 	istio.io/client-go v1.17.1
@@ -93,7 +93,7 @@ require (
 	github.com/go-openapi/validate v0.22.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.12.0 // indirect
+	github.com/go-playground/validator/v10 v10.13.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/glog v1.1.1 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
@@ -119,7 +119,7 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
 	github.com/kr/text v0.2.0 // indirect
-	github.com/leodido/go-urn v1.2.3 // indirect
+	github.com/leodido/go-urn v1.2.4 // indirect
 	github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
@@ -193,7 +193,7 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	istio.io/api v0.0.0-20230427165030-eeaf63b7920f // indirect
 	k8s.io/component-base v0.27.1 // indirect
-	k8s.io/klog/v2 v2.90.1 // indirect
+	k8s.io/klog/v2 v2.100.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20230426210814-b0c0aaee3cc0 // indirect
 	k8s.io/utils v0.0.0-20230406110748-d93618cff8a2 // indirect
 	knative.dev/networking v0.0.0-20230428120551-68725bdd1056 // indirect
