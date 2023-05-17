@@ -37,7 +37,7 @@ require (
 	k8s.io/kube-aggregator v0.27.1
 	knative.dev/caching v0.0.0-20230503130156-f2825feb447d
 	knative.dev/serving v0.37.1
-	sigs.k8s.io/cluster-api-addon-provider-helm v0.1.0-alpha.3-rc.0
+	sigs.k8s.io/cluster-api-addon-provider-helm v0.1.0-alpha.6
 	sigs.k8s.io/gateway-api v0.7.0
 	sigs.k8s.io/secrets-store-csi-driver v1.3.3
 )
