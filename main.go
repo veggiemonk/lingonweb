@@ -22,13 +22,11 @@ import (
 
 const serviceName = "lingon"
 
-var (
-	// //go:embed embed
-	// webapp embed.FS
+// //go:embed embed
+// webapp embed.FS
 
-	//go:embed embed/index.html
-	indexhtml []byte
-)
+//go:embed embed/index.html
+var indexhtml []byte
 
 //
 // init function to register types to runtime.NewScheme() in another file
@@ -161,10 +159,13 @@ func makeLogger(w io.Writer) *slog.Logger {
 		w = os.Stderr
 	}
 	return slog.New(
-		slog.HandlerOptions{
-			AddSource:   true,
-			ReplaceAttr: logReplace,
-		}.NewJSONHandler(w).WithAttrs(
+		slog.NewTextHandler(
+			w,
+			&slog.HandlerOptions{
+				AddSource:   true,
+				ReplaceAttr: logReplace,
+			},
+		).WithAttrs(
 			[]slog.Attr{slog.String("app", serviceName)},
 		),
 	)
@@ -177,7 +178,8 @@ func logReplace(_ []string, a slog.Attr) slog.Attr {
 	// }
 	// Remove the directory from the source's filename.
 	if a.Key == slog.SourceKey {
-		a.Value = slog.StringValue(filepath.Base(a.Value.String()))
+		source := a.Value.Any().(*slog.Source)
+		source.File = filepath.Base(source.File)
 	}
 	return a
 }
