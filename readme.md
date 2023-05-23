@@ -35,7 +35,7 @@ It's not a popular opinion but it works for us.
 
 All the <a href="https://github.com/volvo-cars/lingon/blob/main/docs">Examples</a> are in the <a href="https://github.com/volvo-cars/lingon/blob/main/docs">documentation</a>.
 
-A big example is <a href="https://github.com/volvo-cars/lingon/blob/main/docs/platypus">Platypus</a> which shows how
+A big example is <a href="https://github.com/volvo-cars/lingon/blob/main/docs/platypus2">Platypus</a> which shows how
 the <a href="https://github.com/volvo-cars/lingon/blob/main/docs/kubernetes">kubernetes</a>
 and <a href="https://github.com/volvo-cars/lingon/blob/main/docs/terraform">terraform</a> libraries can be used together.
 
@@ -43,7 +43,7 @@ and <a href="https://github.com/volvo-cars/lingon/blob/main/docs/terraform">terr
 
 Lingon can convert CRDs (Custom Resource Definitions) as well. 
 Although it is not possible to convert all CRDs, as we would need to register them all.
-See [serializer.go](./serializer.go) for an example of how to register the custom resource types.
+See [serializer.go](./knowntypes/serializer.go) for an example of how to register the custom resource types.
 
 > **Open an issue or a PR if you want to add more CRDs.** 🥲
 
