@@ -159,7 +159,7 @@ func makeLogger(w io.Writer) *slog.Logger {
 		w = os.Stderr
 	}
 	return slog.New(
-		slog.NewTextHandler(
+		slog.NewJSONHandler(
 			w,
 			&slog.HandlerOptions{
 				AddSource:   true,
