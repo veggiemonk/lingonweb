@@ -10,7 +10,6 @@ import (
 	_ "net/http/pprof"
 	"os"
 	"os/signal"
-	"path/filepath"
 	"runtime"
 	"syscall"
 	"time"
@@ -178,8 +177,7 @@ func logReplace(_ []string, a slog.Attr) slog.Attr {
 	// }
 	// Remove the directory from the source's filename.
 	if a.Key == slog.SourceKey {
-		source := a.Value.Any().(*slog.Source)
-		source.File = filepath.Base(source.File)
+		return slog.Attr{}
 	}
 	return a
 }
