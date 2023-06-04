@@ -25,7 +25,8 @@ require (
 	github.com/slok/sloth v0.11.0
 	github.com/tektoncd/pipeline v0.47.0
 	github.com/tektoncd/triggers v0.24.0
-	github.com/volvo-cars/lingon v0.0.0-20230522071136-dca6a6fc5a39
+	github.com/vmware-tanzu/velero v1.11.0
+	github.com/volvo-cars/lingon v0.0.0-20230604043955-13bf097d7e28
 	go.uber.org/automaxprocs v1.5.2
 	golang.org/x/exp v0.0.0-20230519143937-03e91628a987
 	istio.io/client-go v1.17.1
@@ -113,7 +114,7 @@ require (
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/hcl v1.0.1-vault-5 // indirect
-	github.com/imdario/mergo v0.3.15 // indirect
+	github.com/imdario/mergo v0.3.16 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect

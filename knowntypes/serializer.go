@@ -24,6 +24,7 @@ import (
 	slothv1alpha1 "github.com/slok/sloth/pkg/kubernetes/api/sloth/v1"
 	tektonpipelinesv1 "github.com/tektoncd/pipeline/pkg/apis/pipeline/v1"
 	tektontriggersv1alpha1 "github.com/tektoncd/triggers/pkg/apis/triggers/v1alpha1"
+	velerov1 "github.com/vmware-tanzu/velero/pkg/apis/velero/v1"
 	istionetworkingv1alpha3 "istio.io/client-go/pkg/apis/networking/v1alpha3"
 	istionetworkingv1beta1 "istio.io/client-go/pkg/apis/networking/v1beta1"
 	istiosecurityv1beta1 "istio.io/client-go/pkg/apis/security/v1beta1"
@@ -125,4 +126,7 @@ func init() {
 	// TEKTON
 	utilruntime.Must(tektonpipelinesv1.AddToScheme(Scheme))
 	utilruntime.Must(tektontriggersv1alpha1.AddToScheme(Scheme))
+
+	// VELERO
+	utilruntime.Must(velerov1.AddToScheme(Scheme))
 }
