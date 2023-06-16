@@ -27,7 +27,7 @@ require (
 	github.com/tektoncd/pipeline v0.47.0
 	github.com/tektoncd/triggers v0.24.0
 	github.com/vmware-tanzu/velero v1.11.0
-	github.com/volvo-cars/lingon v0.0.0-20230604043955-13bf097d7e28
+	github.com/volvo-cars/lingon v0.0.0-20230615075858-eee2451b4bf2
 	go.uber.org/automaxprocs v1.5.2
 	golang.org/x/exp v0.0.0-20230519143937-03e91628a987
 	istio.io/client-go v1.17.1
@@ -101,7 +101,7 @@ require (
 	github.com/go-openapi/validate v0.22.1 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.14.0 // indirect
+	github.com/go-playground/validator/v10 v10.14.1 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/glog v1.1.1 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
