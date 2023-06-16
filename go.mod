@@ -3,6 +3,7 @@ module github.com/veggiemonk/lingonweb
 go 1.20
 
 require (
+	github.com/VictoriaMetrics/operator/api v0.0.0-20230615162852-8e13b6cd1fc5
 	github.com/ardanlabs/conf/v3 v3.1.5
 	github.com/aws/karpenter v0.27.3
 	github.com/aws/karpenter-core v0.27.3
@@ -60,6 +61,10 @@ require (
 	cloud.google.com/go/storage v1.30.1 // indirect
 	contrib.go.opencensus.io/exporter/ocagent v0.7.1-0.20200907061046-05415f1de66d // indirect
 	contrib.go.opencensus.io/exporter/prometheus v0.4.2 // indirect
+	github.com/VictoriaMetrics/VictoriaMetrics v1.90.1-0.20230427110221-29e059e49c7d // indirect
+	github.com/VictoriaMetrics/fasthttp v1.2.0 // indirect
+	github.com/VictoriaMetrics/metrics v1.23.1 // indirect
+	github.com/VictoriaMetrics/metricsql v0.56.2 // indirect
 	github.com/antlr/antlr4/runtime/Go/antlr/v4 v4.0.0-20230512164433-5d1fd1a340c9 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 // indirect
 	github.com/aws/aws-sdk-go v1.44.264 // indirect
@@ -67,6 +72,7 @@ require (
 	github.com/blang/semver v3.5.1+incompatible // indirect
 	github.com/blang/semver/v4 v4.0.0 // indirect
 	github.com/blendle/zapdriver v1.3.1 // indirect
+	github.com/bmatcuk/doublestar/v4 v4.6.0 // indirect
 	github.com/census-instrumentation/opencensus-proto v0.4.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/dave/jennifer v1.6.1 // indirect
@@ -119,6 +125,7 @@ require (
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
+	github.com/klauspost/compress v1.16.5 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
 	github.com/kr/text v0.2.0 // indirect
 	github.com/leodido/go-urn v1.2.4 // indirect
@@ -163,6 +170,12 @@ require (
 	github.com/tidwall/sjson v1.2.5 // indirect
 	github.com/tklauser/go-sysconf v0.3.11 // indirect
 	github.com/tklauser/numcpus v0.6.0 // indirect
+	github.com/valyala/bytebufferpool v1.0.0 // indirect
+	github.com/valyala/fastjson v1.6.4 // indirect
+	github.com/valyala/fastrand v1.1.0 // indirect
+	github.com/valyala/fasttemplate v1.2.2 // indirect
+	github.com/valyala/histogram v1.2.0 // indirect
+	github.com/valyala/quicktemplate v1.7.0 // indirect
 	github.com/veggiemonk/strcase v0.0.0-20230521123733-cfc6c0b1ba22 // indirect
 	github.com/vishvananda/netlink v1.2.1-beta.2.0.20220608195807-1a118fe229fc // indirect
 	github.com/vishvananda/netns v0.0.4 // indirect

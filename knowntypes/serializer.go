@@ -1,6 +1,7 @@
 package knowntypes
 
 import (
+	victoriav1beta1 "github.com/VictoriaMetrics/operator/api/client/versioned/scheme"
 	karpenterv1alpha5 "github.com/aws/karpenter-core/pkg/apis"
 	karpenterapi "github.com/aws/karpenter/pkg/apis"
 	certmanager "github.com/cert-manager/cert-manager/pkg/api"
@@ -129,4 +130,7 @@ func init() {
 
 	// VELERO
 	utilruntime.Must(velerov1.AddToScheme(Scheme))
+
+	// VICTORIA METRICS
+	utilruntime.Must(victoriav1beta1.AddToScheme(Scheme))
 }
