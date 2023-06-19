@@ -3,42 +3,42 @@ module github.com/veggiemonk/lingonweb
 go 1.20
 
 require (
-	github.com/VictoriaMetrics/operator/api v0.0.0-20230615162852-8e13b6cd1fc5
-	github.com/ardanlabs/conf/v3 v3.1.5
-	github.com/aws/karpenter v0.27.3
-	github.com/aws/karpenter-core v0.27.3
-	github.com/cert-manager/cert-manager v1.11.2
+	github.com/VictoriaMetrics/operator/api v0.0.0-20230619154249-4c97f70c9a77
+	github.com/ardanlabs/conf/v3 v3.1.6
+	github.com/aws/karpenter v0.28.0
+	github.com/aws/karpenter-core v0.28.0
+	github.com/cert-manager/cert-manager v1.12.2
 	github.com/cilium/cilium v1.13.2
 	github.com/external-secrets/external-secrets v0.8.1
-	github.com/fluxcd/helm-controller/api v0.33.0
-	github.com/fluxcd/image-automation-controller/api v0.33.1
-	github.com/fluxcd/image-reflector-controller/api v0.27.2
+	github.com/fluxcd/helm-controller/api v0.34.1
+	github.com/fluxcd/image-automation-controller/api v0.34.1
+	github.com/fluxcd/image-reflector-controller/api v0.28.0
 	github.com/fluxcd/kustomize-controller/api v0.35.1
 	github.com/fluxcd/notification-controller/api v0.33.0
-	github.com/fluxcd/source-controller/api v1.0.0-rc.3
-	github.com/grafana-operator/grafana-operator/v5 v5.0.0-rc2
+	github.com/fluxcd/source-controller/api v1.0.0-rc.5
+	github.com/grafana-operator/grafana-operator/v5 v5.0.1
 	github.com/kserve/kserve v0.10.1
 	github.com/kserve/modelmesh-serving v0.10.0
-	github.com/kubeflow/kubeflow/components/profile-controller v0.0.0-20230516195900-f96be9a7c0f5
+	github.com/kubeflow/kubeflow/components/profile-controller v0.0.0-20230614143835-29ee2648f4e0
 	github.com/nats-io/nack v0.10.1
 	github.com/open-telemetry/opentelemetry-operator v1.51.0
-	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.65.1
+	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.66.0
 	github.com/slok/sloth v0.11.0
-	github.com/tektoncd/pipeline v0.47.0
-	github.com/tektoncd/triggers v0.24.0
+	github.com/tektoncd/pipeline v0.48.0
+	github.com/tektoncd/triggers v0.24.1
 	github.com/vmware-tanzu/velero v1.11.0
-	github.com/volvo-cars/lingon v0.0.0-20230615075858-eee2451b4bf2
+	github.com/volvo-cars/lingon v0.0.0-20230619213704-58b028230067
 	go.uber.org/automaxprocs v1.5.2
-	golang.org/x/exp v0.0.0-20230519143937-03e91628a987
-	istio.io/client-go v1.17.1
-	k8s.io/api v0.27.2
-	k8s.io/apiextensions-apiserver v0.27.2
-	k8s.io/apimachinery v0.27.2
-	k8s.io/apiserver v0.27.1
+	golang.org/x/exp v0.0.0-20230522175609-2e198f4a06a1
+	istio.io/client-go v1.18.0
+	k8s.io/api v0.27.3
+	k8s.io/apiextensions-apiserver v0.27.3
+	k8s.io/apimachinery v0.27.3
+	k8s.io/apiserver v0.27.3
 	k8s.io/client-go v1.5.2
-	k8s.io/kube-aggregator v0.27.1
-	knative.dev/caching v0.0.0-20230503130156-f2825feb447d
-	knative.dev/serving v0.37.1
+	k8s.io/kube-aggregator v0.27.3
+	knative.dev/caching v0.0.0-20230615185548-38a807574e69
+	knative.dev/serving v0.37.2
 	sigs.k8s.io/cluster-api-addon-provider-helm v0.1.0-alpha.6
 	sigs.k8s.io/gateway-api v0.7.0
 	sigs.k8s.io/secrets-store-csi-driver v1.3.3
@@ -51,6 +51,8 @@ replace (
 	k8s.io/apimachinery => k8s.io/apimachinery v0.26.3
 	k8s.io/client-go => k8s.io/client-go v0.26.3
 	k8s.io/component-base => k8s.io/component-base v0.26.3
+	sigs.k8s.io/controller-runtime => sigs.k8s.io/controller-runtime v0.14.0 // indirect
+
 )
 
 require (
@@ -67,7 +69,7 @@ require (
 	github.com/VictoriaMetrics/metricsql v0.56.2 // indirect
 	github.com/antlr/antlr4/runtime/Go/antlr/v4 v4.0.0-20230512164433-5d1fd1a340c9 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 // indirect
-	github.com/aws/aws-sdk-go v1.44.264 // indirect
+	github.com/aws/aws-sdk-go v1.44.273 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/blang/semver v3.5.1+incompatible // indirect
 	github.com/blang/semver/v4 v4.0.0 // indirect
@@ -80,8 +82,8 @@ require (
 	github.com/emicklei/go-restful/v3 v3.10.2 // indirect
 	github.com/evanphx/json-patch/v5 v5.6.0 // indirect
 	github.com/fluxcd/pkg/apis/acl v0.1.0 // indirect
-	github.com/fluxcd/pkg/apis/kustomize v1.0.0 // indirect
-	github.com/fluxcd/pkg/apis/meta v1.0.0 // indirect
+	github.com/fluxcd/pkg/apis/kustomize v1.1.0 // indirect
+	github.com/fluxcd/pkg/apis/meta v1.1.0 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
 	github.com/go-kit/log v0.2.1 // indirect
@@ -141,7 +143,7 @@ require (
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/openshift/api v3.9.0+incompatible // indirect
 	github.com/opentracing/opentracing-go v1.2.1-0.20220228012449-10b1cf09e00b // indirect
-	github.com/pelletier/go-toml/v2 v2.0.7 // indirect
+	github.com/pelletier/go-toml/v2 v2.0.8 // indirect
 	github.com/petermattis/goid v0.0.0-20230516130339-69c5d00fc54d // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
@@ -194,11 +196,11 @@ require (
 	golang.org/x/sync v0.2.0 // indirect
 	golang.org/x/sys v0.8.0 // indirect
 	golang.org/x/term v0.8.0 // indirect
-	golang.org/x/text v0.9.0 // indirect
+	golang.org/x/text v0.10.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
 	golang.org/x/tools v0.9.1 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
-	gomodules.xyz/jsonpatch/v2 v2.2.0 // indirect
+	gomodules.xyz/jsonpatch/v2 v2.3.0 // indirect
 	google.golang.org/api v0.122.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20230410155749-daa745c078e1 // indirect
@@ -208,16 +210,16 @@ require (
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	istio.io/api v0.0.0-20230516190108-40537bfae764 // indirect
-	k8s.io/component-base v0.27.1 // indirect
+	istio.io/api v0.0.0-20230524015941-fa6c5f7916bf // indirect
+	k8s.io/component-base v0.27.3 // indirect
 	k8s.io/klog/v2 v2.100.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20230515203736-54b630e78af5 // indirect
 	k8s.io/utils v0.0.0-20230505201702-9f6742963106 // indirect
 	knative.dev/networking v0.0.0-20230511122402-33636d99d870 // indirect
-	knative.dev/pkg v0.0.0-20230502134655-db8a35330281 // indirect
+	knative.dev/pkg v0.0.0-20230612155445-74c4be5e935e // indirect
 	mvdan.cc/gofumpt v0.5.0 // indirect
 	sigs.k8s.io/cluster-api v1.4.2 // indirect
-	sigs.k8s.io/controller-runtime v0.14.6 // indirect
+	sigs.k8s.io/controller-runtime v0.15.0 // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.3 // indirect
 	sigs.k8s.io/yaml v1.3.0 // indirect
