@@ -2,6 +2,7 @@
 .vscode
 bin/
 out/
+dist/
 
 kygo
 lingonweb
