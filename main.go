@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log/slog"
 	"net/http"
 	_ "net/http/pprof"
 	"os"
@@ -16,7 +17,6 @@ import (
 
 	"github.com/ardanlabs/conf/v3"
 	_ "go.uber.org/automaxprocs"
-	"golang.org/x/exp/slog"
 )
 
 const serviceName = "lingon"
@@ -119,18 +119,14 @@ func run(log *slog.Logger) error {
 		IdleTimeout:       cfg.IdleTimeout,
 	}
 	go func() {
-		if zerr := srv.ListenAndServe(); zerr != nil &&
-			!errors.Is(zerr, http.ErrServerClosed) {
+		if zerr := srv.ListenAndServe(); zerr != nil && !errors.Is(zerr, http.ErrServerClosed) {
 			log.Error("failed to start server: %v", "err", zerr)
 			panic(zerr)
 		}
 	}()
 
 	<-stopChan
-	ctxShutDown, cancel := context.WithTimeout(
-		context.Background(),
-		time.Minute,
-	)
+	ctxShutDown, cancel := context.WithTimeout(context.Background(), time.Minute)
 	defer func() { cancel() }()
 
 	log.Info("shutting down the service...")
@@ -158,26 +154,8 @@ func makeLogger(w io.Writer) *slog.Logger {
 		w = os.Stderr
 	}
 	return slog.New(
-		slog.NewJSONHandler(
-			w,
-			&slog.HandlerOptions{
-				AddSource:   true,
-				ReplaceAttr: logReplace,
-			},
-		).WithAttrs(
+		slog.NewJSONHandler(w, &slog.HandlerOptions{AddSource: true}).WithAttrs(
 			[]slog.Attr{slog.String("app", serviceName)},
 		),
 	)
-}
-
-func logReplace(_ []string, a slog.Attr) slog.Attr {
-	// // Remove time.
-	// if a.Key == slog.TimeKey && len(groups) == 0 {
-	// 	a.Key = ""
-	// }
-	// Remove the directory from the source's filename.
-	if a.Key == slog.SourceKey {
-		return slog.Attr{}
-	}
-	return a
 }

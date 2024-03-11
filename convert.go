@@ -6,13 +6,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log/slog"
 	"net/http"
 	"os"
 	"strings"
 
-	"github.com/veggiemonk/lingonweb/knowntypes"
 	"github.com/volvo-cars/lingon/pkg/kube"
-	"golang.org/x/exp/slog"
+
+	"github.com/veggiemonk/lingonweb/knowntypes"
 )
 
 type Meta struct {
