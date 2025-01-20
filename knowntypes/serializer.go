@@ -1,9 +1,9 @@
 package knowntypes
 
 import (
-	victoriav1beta1 "github.com/VictoriaMetrics/operator/api/client/versioned/scheme"
-	karpenterv1alpha5 "github.com/aws/karpenter-core/pkg/apis"
-	karpenterapi "github.com/aws/karpenter/pkg/apis"
+
+	// karpenterv1alpha5 "github.com/aws/karpenter-core/pkg/apis"
+	// karpenterapi "github.com/aws/karpenter/pkg/apis"
 	certmanager "github.com/cert-manager/cert-manager/pkg/api"
 	ciliumv2 "github.com/cilium/cilium/pkg/k8s/apis/cilium.io/v2"
 	ciliumv2alpha1 "github.com/cilium/cilium/pkg/k8s/apis/cilium.io/v2alpha1"
@@ -21,6 +21,7 @@ import (
 	profilev1beta1 "github.com/kubeflow/kubeflow/components/profile-controller/api/v1beta1"
 	jetstreamv1beta2 "github.com/nats-io/nack/pkg/jetstream/apis/jetstream/v1beta2"
 	otelv1beta1 "github.com/open-telemetry/opentelemetry-operator/apis/v1beta1"
+
 	// otelv1alpha1 "github.com/open-telemetry/opentelemetry-operator/apis/v1alpha1"
 	prometheusv1 "github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring/v1"
 	slothv1alpha1 "github.com/slok/sloth/pkg/kubernetes/api/sloth/v1"
@@ -81,9 +82,9 @@ func init() {
 	// NATS JETSTREAM
 	utilruntime.Must(jetstreamv1beta2.AddToScheme(Scheme))
 
-	// KARPENTER
-	utilruntime.Must(karpenterv1alpha5.AddToScheme(Scheme))
-	utilruntime.Must(karpenterapi.AddToScheme(Scheme))
+	// // KARPENTER
+	// utilruntime.Must(karpenterv1alpha5.AddToScheme(Scheme))
+	// utilruntime.Must(karpenterapi.AddToScheme(Scheme))
 
 	// KNATIVE
 	utilruntime.Must(servingv1alpha1.AddToScheme(Scheme))
@@ -133,6 +134,6 @@ func init() {
 	// VELERO
 	utilruntime.Must(velerov1.AddToScheme(Scheme))
 
-	// VICTORIA METRICS
-	utilruntime.Must(victoriav1beta1.AddToScheme(Scheme))
+	// // VICTORIA METRICS
+	// utilruntime.Must(victoriav1beta1.AddToScheme(Scheme))
 }

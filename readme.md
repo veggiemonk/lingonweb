@@ -8,13 +8,13 @@
 
 ## Intro
 
-Lingon Web is a web-based interface for [Lingon](https://github.com/volvo-cars/lingon).
-[Lingon](https://github.com/volvo-cars/lingon) is a library and command line tool to write HCL (<a href="https://www.terraform.io/" rel="nofollow">Terraform</a>)
+Lingon Web is a web-based interface for [Lingon](https://github.com/golingon/lingon).
+[Lingon](https://github.com/golingon/lingon) is a library and command line tool to write HCL (<a href="https://www.terraform.io/" rel="nofollow">Terraform</a>)
 and <a href="https://kubernetes.io" rel="nofollow">kubernetes</a> manifest (YAML) in Go.
 
 _This web app is an example of how to use the library to convert kubernetes manifests to Go code._
 
-See <a href="https://github.com/volvo-cars/lingon/blob/main/docs/rationale.md">Rationale</a> for why we built this.
+See <a href="https://github.com/golingon/lingon/blob/main/docs/rationale.md">Rationale</a> for why we built this.
 
 > Lingon is not a platform, it is a library meant to be consumed in a Go application that platform engineers write to manage their platforms.
 > It is a tool to build and automate the creation and the management of platforms regardless of the target infrastructure and services.
@@ -33,11 +33,11 @@ and have suffered the pain of configuration languages and complexity of gluing t
 We prefer to write Go code and use the same language for everything. 
 It's not a popular opinion but it works for us.
 
-All the <a href="https://github.com/volvo-cars/lingon/blob/main/docs">Examples</a> are in the <a href="https://github.com/volvo-cars/lingon/blob/main/docs">documentation</a>.
+All the <a href="https://github.com/golingon/lingon/blob/main/docs">Examples</a> are in the <a href="https://github.com/golingon/lingon/blob/main/docs">documentation</a>.
 
-A big example is <a href="https://github.com/volvo-cars/lingon/blob/main/docs/platypus2">Platypus</a> which shows how
-the <a href="https://github.com/volvo-cars/lingon/blob/main/docs/kubernetes">kubernetes</a>
-and <a href="https://github.com/volvo-cars/lingon/blob/main/docs/terraform">terraform</a> libraries can be used together.
+A big example is <a href="https://github.com/golingon/lingon/blob/main/docs/platypus2">Platypus</a> which shows how
+the <a href="https://github.com/golingon/lingon/blob/main/docs/kubernetes">kubernetes</a>
+and <a href="https://github.com/golingon/lingon/blob/main/docs/terraform">terraform</a> libraries can be used together.
 
 ## Works with CRDs
 

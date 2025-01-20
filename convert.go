@@ -11,7 +11,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/volvo-cars/lingon/pkg/kube"
+	"github.com/golingon/lingon/pkg/kube"
 
 	"github.com/veggiemonk/lingonweb/knowntypes"
 )
