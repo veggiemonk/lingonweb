@@ -1,8 +1,6 @@
 module github.com/veggiemonk/lingonweb
 
-go 1.23.4
-
-toolchain go1.23.5
+go 1.23.5
 
 require (
 	github.com/ardanlabs/conf/v3 v3.2.0
